@@ -7,7 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-src-tauri/.xwin-cache/
+./src-tauri/.xwin-cache/
 node_modules
 dist
 dist-ssr
