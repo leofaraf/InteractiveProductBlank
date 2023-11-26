@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+.head-list > * {
+    @apply w-1/2
+}
 
 @page {
     size: A4;
@@ -23,6 +26,9 @@ section {
 }
 
 @media print {
+    #hid {
+        display: none;
+    }
     body {
         visibility: hidden;
     }

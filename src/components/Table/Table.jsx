@@ -6,6 +6,7 @@ const Table = (props) => {
     const data = useContext(DataContext);
     const index = props.index;
 
+    const [id, setId] = useState("hid");
     const [result, setResult] = useState(new Array(element.data.length-1).fill(""));
 
     useEffect(() => {
@@ -15,9 +16,11 @@ const Table = (props) => {
             result.map((item, index) => {
                 resultArray.push(element.data[index] + " : " + item)
             })
+            setId("")
             element.result = resultArray.join("\n")
         } else {
             element.result = ""
+            setId("hid")
         }
         data.setElementByIndex(element, props.index)
     }, [result])
@@ -29,7 +32,7 @@ const Table = (props) => {
     }
 
     return (
-        <div className="w-full flex justify-center p-3">
+        <div id={id} className="w-full flex justify-center p-3">
             <table className="border-black border-2">
                 <thead>
                     <tr>

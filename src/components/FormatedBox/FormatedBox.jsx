@@ -1,12 +1,16 @@
 import { useContext, useEffect, useState } from "react";
 import { SaverContext } from "../../SaverProvider";
 import { DataContext } from "../../DataProvider";
+import { ParserContext } from "../../ParserProvider";
+import { Helmet } from "react-helmet";
 
 const FormatedBox = (props) => {
     const element = props.element;
     const format = element.params.input_format
     const divined = format.split("{}")
     const data = useContext(DataContext);
+    const [id, setId] = useState("hid");
+    const context = useContext(ParserContext);
 
     const [result, setResult] = useState(new Array(divined.length-1).fill(""))
 
@@ -21,13 +25,20 @@ const FormatedBox = (props) => {
                 return part + result[index];
             }).join("")
             element.result = output
+            setId("")
         } else {
             element.result = ""
+            setId("hid")
         }
         data.setElementByIndex(element, props.index)
     }, [result])
 
-    return (
+    return <>
+        {element?.params?.header && (
+            <span id={id}>
+                {context.parse_element(element?.params?.header)}
+            </span>
+        )}
         <div>
             {divined.map((part, index) => {
                 if (index == divined.length-1) {
@@ -37,7 +48,7 @@ const FormatedBox = (props) => {
                 const ri = element.data[index]
 
                 return (
-                    <>
+                    <span id={id}>
                         {part}
                         {/* {remainder[index]} */}
                         {ri && ri === "text-input" && (
@@ -59,9 +70,9 @@ const FormatedBox = (props) => {
                                     setResult(newResult)
                                 }} onKeyPress={(event) => {
                                     if (!/[0-9]/.test(event.key)) {
-                                      event.preventDefault();
+                                    event.preventDefault();
                                     }
-                                  }}/>
+                                }}/>
                             </>
                         )}
                         {ri && Array.isArray(ri) && (
@@ -82,11 +93,11 @@ const FormatedBox = (props) => {
                                 </select>
                             </>
                         )}
-                    </>
+                    </span>
                 )
             })}
         </div>
-    );
+    </>
 }
 
 export default FormatedBox

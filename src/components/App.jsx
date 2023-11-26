@@ -24,7 +24,6 @@ const App = () => {
     <>
       <div id="form_conteiner" className="flex print flex-col gap-6 p-3">
         {dataContext.data && context.parse_data(dataContext.data)}
-        {getSaver()}
       </div>
       <div className="flex gap-3 p-3 justify-center">
         <button className="bg-stone-500 hover:bg-stone-600 text-white font-sans font-bold p-3 w-32 rounded-lg"

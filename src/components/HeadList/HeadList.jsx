@@ -6,12 +6,12 @@ const HeadList = (props) => {
     const context = useContext(ParserContext);
 
     return (
-        <div className="flex flex-wrap">
+        <div className="flex flex-wrap head-list">
             {element && element.data && element.data.map((x) => {
                 return (
-                    <div className="w-1/2">
-                        {context.parse_element(x)}
-                    </div>
+                    <>
+                    {context.parse_element(x)}
+                    </>
                 )
             })}
         </div>

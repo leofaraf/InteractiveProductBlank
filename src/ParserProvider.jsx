@@ -14,9 +14,9 @@ export const ParserProvider = ({children}) => {
             case "head-list":
                 return <HeadList element={element} index = {index}/>
             case "text":
-                return <p className="font-bold">{element.data}</p>
+                return <div className="font-bold">{element.data}</div>
             case "text-big":
-                return <p className="font-bold text-xl">{element.data}</p>
+                return <div className="font-bold text-xl">{element.data}</div>
             case "formated-box":
                 return <FormatedBox element={element} index = {index}/>
             case "facades":
